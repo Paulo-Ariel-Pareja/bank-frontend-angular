@@ -15,8 +15,11 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-builders/custom-webpack:browser",
           "options": {
+            "customWebpackConfig": {
+              "path": "./webpack.config.js"
+            },
             "outputPath": "dist/bankApp",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -64,9 +67,13 @@
           }
         },
         "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
+          "builder": "@angular-builders/custom-webpack:dev-server",
           "options": {
-            "browserTarget": "bankApp:build"
+            "customWebpackConfig": {
+              "path": "./webpack.config.js"
+            },
+            "browserTarget": "bankApp:build",
+            "proxyConfig": "src/proxy.conf.json"
           },
           "configurations": {
             "production": {
@@ -123,6 +130,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "bankApp"
+    }
+  },
+  "defaultProject": "bankApp",
+  "cli": {
+    "analytics": false
+  }
 }
