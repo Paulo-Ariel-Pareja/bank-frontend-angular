@@ -29,7 +29,9 @@ export class LoginService {
       if (res && res.jwt) {
         sessionStorage.setItem('jwt', res.jwt);
         this.errorSubject.next(null);
-        this.userSubject.next(res.data);
+        if (res.data) {
+          this.userSubject.next(res.data);
+        }
         this.router.navigateByUrl('dashboard');
       } else if (res.Message) {
         this.errorSubject.next(res.Message);
@@ -37,7 +39,7 @@ export class LoginService {
     });
   }
 
-  isAuthenticated():boolean {
+  isAuthenticated(): boolean {
     if (sessionStorage.getItem('jwt')) {
       return true;
     }
