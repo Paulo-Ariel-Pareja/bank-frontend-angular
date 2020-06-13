@@ -1,7 +1,11 @@
 {
-  "/login/*": {
-      "target": "http://localhost:8888",
-      "secure": false,
-      "logLevel": "debug"
+  "/api/*": {
+    "target": "http://localhost:8888",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/api/": ""
+    }
   }
 }
